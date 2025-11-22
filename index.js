@@ -29,9 +29,8 @@ io.on("connection", (socket) => {
   });
 
   //   typing keep user
-  socket.on("typing", ({ username, room }) => {
-    console.log("typing", username, room);
-    socket.emit("typing_user", username);
+  socket.on("typing", ({ username: user, room }) => {
+    socket.to(room).emit("typing_user", user);
   });
 });
 
