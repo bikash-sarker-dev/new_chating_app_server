@@ -27,6 +27,12 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
     // console.log("send message", data);
   });
+
+  //   typing keep user
+  socket.on("typing", ({ username, room }) => {
+    console.log("typing", username, room);
+    socket.emit("typing_user", username);
+  });
 });
 
 server.listen("4000", () => {
