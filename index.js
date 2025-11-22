@@ -17,6 +17,10 @@ app.use(cors());
 
 io.on("connection", (socket) => {
   console.log("socket connection: ", socket);
+  socket.on("join_room", (room) => {
+    socket.join(room);
+    console.log(room, socket.id);
+  });
 });
 
 server.listen("4000", () => {
