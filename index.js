@@ -16,10 +16,16 @@ const io = new Server(server, {
 app.use(cors());
 
 io.on("connection", (socket) => {
-  console.log("socket connection: ", socket);
+  console.log("socket connection: ");
   socket.on("join_room", (room) => {
     socket.join(room);
-    console.log(room, socket.id);
+    // console.log(room, socket.id);
+  });
+
+  //   message send server
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+    // console.log("send message", data);
   });
 });
 
